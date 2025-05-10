@@ -97,7 +97,7 @@ void first_ex_with_other_containers()
 		{7, 3}, {8, 2}, {9, 1} };
 
 	num_odd = std::count_if(int_map.begin(), int_map.end(), is_odd_value);
-	cout << format("num_odd = {} (std::map)\n");
+	cout << format("num_odd = {} (std::map)\n",num_odd);
 
 	std::unordered_map<unsigned, int> int_unord_map{ {1, 9}, {2, 8}, {3, 7}, {4, 6},
 	{5, 5}, {6, 4}, {7, 3}, {8, 2}, {9, 1} };
