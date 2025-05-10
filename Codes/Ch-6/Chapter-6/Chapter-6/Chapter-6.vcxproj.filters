@@ -24,12 +24,18 @@
     <ClInclude Include="ExampleDeclarations.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="OptionInfo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Payoffs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ParallelSTLAlgorithms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
