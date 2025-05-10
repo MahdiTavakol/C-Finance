@@ -128,12 +128,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EquityPriceGenerator.h" />
     <ClInclude Include="ExampleDeclarations.h" />
+    <ClInclude Include="MCOptionValuation.h" />
     <ClInclude Include="OptionInfo.h" />
     <ClInclude Include="Payoffs.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EquityPriceGenerator.cpp" />
+    <ClCompile Include="MCOptionValuation.cpp" />
     <ClCompile Include="OptionInfo.cpp" />
     <ClCompile Include="ParallelSTLAlgorithms.cpp" />
     <ClCompile Include="Payoffs.cpp" />
