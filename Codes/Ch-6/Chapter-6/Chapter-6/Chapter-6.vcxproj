@@ -136,6 +136,7 @@
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnginesAndDistributions.cpp" />
     <ClCompile Include="EquityPriceGenerator.cpp" />
     <ClCompile Include="MCOptionValuation.cpp" />
     <ClCompile Include="OptionInfo.cpp" />
