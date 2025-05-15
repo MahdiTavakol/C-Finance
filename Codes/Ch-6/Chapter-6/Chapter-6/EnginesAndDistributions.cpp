@@ -238,4 +238,26 @@ void max_drawdown_sim()
 		auto max_dd_in_scen = max_dd_lam(pnl);
 		max_drawdowns.push_back(max_dd_in_scen);
 	}
+
+	print_this("\nMax dd's in each scen:\n");
+	auto print_dec_from = [](double x) {cout << std::fixed << std::setprecision(2) << x << ", "; };
+	std::ranges::for_each(max_drawdowns, print_dec_from);
+
+	cout << "\n\nSmallest max dd = " << *(std::ranges::min_element(max_drawdowns)) 
+		<< " Largest max dd = " << *(std::ranges::max_element(max_drawdowns)) << "\n\n";
+
+	using std::array;
+
+	auto norm_params = [](const vector<double>& v) -> array<double,2>
+		{
+			double mean = (1.0 / v.size()) * std::accumulate(v.begin(), v.end(), 0.0);
+
+			double sum_sq = 0.0;
+			for (double val: v)
+			{
+				sum_sq += (val - mean) * (val - mean);
+			}
+			double stdev = std::sqrt(sum_sq /v.size());
+			return std::array{ mean, stdev };
+		};
 }
