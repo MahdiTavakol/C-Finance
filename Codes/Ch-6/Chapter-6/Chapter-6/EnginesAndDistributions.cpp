@@ -76,3 +76,166 @@ void mersenne_twister_and_normal_dist()
 	}
 	cout << "\n\n";
 }
+
+void other_distributions()
+{
+	using std::cout;
+	cout << "\n*** other_distributions() ***\n";
+
+	std::vector<double> t_draws(10);
+	std::vector<double> p_draws(10);
+	std::mt19937_64 mt{ 25 };
+
+	std::student_t_distribution<> stu{ 3 };
+	std::poisson_distribution<> pssn{ 7.5 };
+
+	for (double& x : t_draws)
+	{
+		x = stu(mt);
+	}
+
+	for (double& x : p_draws)
+	{
+		x = pssn(mt);
+	}
+
+	cout << "Random draws from t(3):\n";
+	for (double x : t_draws)
+	{
+		cout << x << " ";
+	}
+	cout << "\n\n";
+
+	cout << "Random draws from Poisson(7.5):\n";
+	for (double x : p_draws)
+	{
+		cout << x << " ";
+	}
+	cout << "\n\n";
+}
+
+void shuffle_algo_example()
+{
+	using std::vector, std::cout;
+	cout << "\n*** shuffle_algo_example() ***\n";
+
+	vector<int> v{ 1,2,3 };
+	std::mt19937_64 mt{ 0 };
+
+	for (unsigned j = 0; j < 3; j++)
+	{
+		std::shuffle(v.begin(), v.end(), mt);
+		for (int k : v)
+		{
+			print_this(k);
+		}
+		print_this("; ");
+	}
+	print_this("\n\n");
+
+	std::ranges::shuffle(v, mt);
+
+	print_this("\n\n");
+}
+
+void max_drawdown_sim()
+{
+	using std::vector, std::format, std::cout;
+	cout << "\n*** max_drawdown_sim() ***\n";
+
+	vector<double> pnl
+	{
+		-149'299.30, -673'165.13,    3'891'123.79,  1'061'346.21, -578'464.00,
+		-260'855.99,  1'102'167.76,  509'764.96,   -276'786.46,   -11'947.13,
+		-277'781.70, -318'603.05,    57'747.06,     151'336.99,    267'826.14,
+		-198'132.05, -175'232.84,   -5'973.61,      177'224.51,   -711'878.76,
+		-276'786.56,  116'489.15,   -185'188.30,    1'183'810.47,  1'563'147.38,
+		-83'632.98,   527'687.09,   -307'650.96,   -321'589.76,   -1'434'711.00,
+		 742'743.96, -245'921.36,   -198'131.26,    399'250.02,   -311'632.90,
+		 326'569.83,  437'084.67,   -297'694.80,   -379'336.81,   -173'240.27,
+		-62'724.74,  -363'407.14,   -142'375.97,   -103'546.19,    187'179.27,
+		-161'293.14, -131'423.78,    1'195'759.19,  198'131.95,   -229'991.59,
+		-109'519.00, -148'348.69,    1'447'621.95
+	};
+
+	for (double& x : pnl)
+	{
+		cout << std::fixed << std::setprecision(2) << x << ", ";
+	}
+	print_this("\n\n");
+
+	cout << "Cumulative P/L values from the backtest, using std::partial_sum:\n";
+	std::vector<double> cum_pnl;
+	cum_pnl.reserve(pnl.size());
+	std::partial_sum(pnl.begin(), pnl.end(), std::back_inserter(cum_pnl));
+
+	for (double x : cum_pnl)
+	{
+		cout << std::fixed << std::setprecision(2) << x << ", ";
+	}
+	print_this("\n\n");
+
+
+	double peak = cum_pnl.front();
+	vector<double> drawdowns;
+	drawdowns.reserve(cum_pnl.size());
+
+	for (auto pos = cum_pnl.begin() + 1; pos != cum_pnl.end(); ++pos)
+	{
+		if (*pos > peak)
+		{
+			peak = *pos;
+		}
+
+		drawdowns.push_back(peak - *pos);
+	}
+
+	double max_dd = *std::ranges::max_element(drawdowns);
+
+	double net_pl_over_max_dd = cum_pnl.back() / max_dd;
+
+	cout << std::fixed << std::setprecision(2) << "Max DD from backtest = $" << max_dd <<
+		", Net P/L = $" << cum_pnl.back() << ", Net Profit/MaxDD = " << net_pl_over_max_dd << "\n\n";
+
+	auto max_dd_lam = [](const vector<double < &v)
+		{
+			std::vector<double> cum_pnl;
+			cum_pnl.reserve(v.size());
+			double max_dd = 0.0;
+			std::partial_sum(v.begin(), v.end(), std::back_inserter(cum_pnl));
+			double peak = cum_pnl.front();
+
+			for (auto pos = cum_pnl.begin() + 1; pos != cum_pnl.end(); ++pos)
+			{
+				if (*pos < peak)
+				{
+					max_dd = std::max(peak - *pos, max_dd);
+				}
+				else if (peak < *pos)
+				{
+					peak = *pos;
+				}
+				else
+				{
+					continue;
+				}
+			}
+			return max_dd;
+		};
+
+	unsigned n = 100;
+
+	vector<double> max_drawdowns;
+	max_drawdowns.reserve(n);
+
+	max_drawdowns.push_back(max_dd);
+
+	std::mt19937_64 mt{ 10 };
+
+	for (unsigned k = 1; k < n; ++k)
+	{
+		std::ranges::shuffle(pnl, mt);
+		auto max_dd_in_scen = max_dd_lam(pnl);
+		max_drawdowns.push_back(max_dd_in_scen);
+	}
+}
