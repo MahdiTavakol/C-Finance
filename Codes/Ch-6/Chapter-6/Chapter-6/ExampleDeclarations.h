@@ -9,7 +9,7 @@ void print_this(const T& t)
 
 void engines_and_distributions();
 
-void default_random_engine();
+void default_random_engines();
 void mersenne_twister_and_normal_dist();
 void other_distributions();
 void shuffle_algo_example();

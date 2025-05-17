@@ -17,7 +17,7 @@
 void engines_and_distributions()
 {
 	std::cout << "-------- ENGINES AND DISTRIBUTIONS -------\n";
-	default_random_engine();
+	default_random_engines();
 	mersenne_twister_and_normal_dist();
 	other_distributions();
 	shuffle_algo_example();
@@ -28,7 +28,7 @@ void default_random_engines()
 {
 	using std::vector, std::cout;
 
-	cout << "\n*** default_random_engine() ***\n";
+	cout << "\n*** default_random_engines() ***\n";
 
 	std::default_random_engine def{ 100 };
 
