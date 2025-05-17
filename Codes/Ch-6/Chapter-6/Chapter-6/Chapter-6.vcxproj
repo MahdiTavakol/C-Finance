@@ -136,8 +136,11 @@
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Concurrency.cpp" />
     <ClCompile Include="EnginesAndDistributions.cpp" />
     <ClCompile Include="EquityPriceGenerator.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MCOptionExamplesParallel.cpp" />
     <ClCompile Include="MCOptionValuation.cpp" />
     <ClCompile Include="OptionInfo.cpp" />
     <ClCompile Include="ParallelSTLAlgorithms.cpp" />

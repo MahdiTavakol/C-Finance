@@ -53,5 +53,14 @@
     <ClCompile Include="EnginesAndDistributions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Concurrency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MCOptionExamplesParallel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -240,8 +240,8 @@ void max_drawdown_sim()
 	}
 
 	print_this("\nMax dd's in each scen:\n");
-	auto print_dec_from = [](double x) {cout << std::fixed << std::setprecision(2) << x << ", "; };
-	std::ranges::for_each(max_drawdowns, print_dec_from);
+	auto print_dec_form = [](double x) {cout << std::fixed << std::setprecision(2) << x << ", "; };
+	std::ranges::for_each(max_drawdowns, print_dec_form);
 
 	cout << "\n\nSmallest max dd = " << *(std::ranges::min_element(max_drawdowns)) 
 		<< " Largest max dd = " << *(std::ranges::max_element(max_drawdowns)) << "\n\n";
@@ -260,4 +260,39 @@ void max_drawdown_sim()
 			double stdev = std::sqrt(sum_sq /v.size());
 			return std::array{ mean, stdev };
 		};
+
+	auto mean = norm_params(max_drawdowns)[0];
+	auto sd = norm_params(max_drawdowns)[1];
+
+	const double z_val = 1.64485;
+	double upper_conf_intvl_norm =  mean + /*norm_params(max_drawdowns)*/ sd * z_val;
+	cout << std::fixed << std::setprecision(2) << "Upper confidence level with normal assumption = " << upper_conf_intvl_norm;
+	print_this("\n\n");
+
+	std::ranges::sort(max_drawdowns);
+
+	cout << "\n\nSorted max Drawdowns:\n";
+	std::ranges::for_each(max_drawdowns, print_dec_form);
+	print_this("\n\n");
+
+	double alpha = 0.05;
+	long upper_loc = std::lround(alpha * max_drawdowns.size());
+	double max_dd_conf_lev = *(max_drawdowns.end() - upper_loc - 1);
+	cout << "Worst possible maximum drawdown at 95% confidence level = ";
+	print_dec_form(max_dd_conf_lev);
+	print_this("\n\n");
+
+	alpha = 0.025;
+	upper_loc = std::lround(alpha * max_drawdowns.size());
+	max_dd_conf_lev = *(max_drawdowns.end() - upper_loc - 1);
+	cout << "Worst possible maximum drawdown at 97.5% confidence level = ";
+	print_dec_form(max_dd_conf_lev);
+	print_this("\n\n");
+
+	alpha = 0.01;
+	upper_loc = std::lround(alpha * max_drawdowns.size());
+	max_dd_conf_lev = *(max_drawdowns.end() - upper_loc - 1);
+	cout << "Worst possible maximum drawdown at 99% confidence level = ";
+	print_dec_form(max_dd_conf_lev);
+	print_this("\n\n");
 }
