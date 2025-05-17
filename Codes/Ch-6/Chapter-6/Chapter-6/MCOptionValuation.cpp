@@ -21,9 +21,10 @@ MCOptionValuation::MCOptionValuation(OptionInfo&& opt, int time_steps, double vo
 */
 
 MCOptionValuation::MCOptionValuation(OptionInfo&& opt, int time_steps, double vol,
-	double int_rate, double div_rate, BarrierType barrier_type, double barrier_value) : opt_{ std::move(opt) }, time_steps_{ time_steps },
-	vol_{ vol }, int_rate_{ int_rate }, div_rate_{ div_rate },
-	barrier_type_{ barrier_type }, barrier_value_{barrier_value} {}
+	double int_rate, double div_rate, BarrierType barrier_type, double barrier_value) 
+	: opt_{ std::move(opt) }, time_steps_{ time_steps },
+	  vol_{ vol }, int_rate_{ int_rate }, div_rate_{ div_rate },
+	  barrier_type_{ barrier_type }, barrier_value_{barrier_value} {}
 
 
 double MCOptionValuation::calc_price_euro(double spot, int num_scenarios, unsigned unif_start_seed)
@@ -150,7 +151,7 @@ double MCOptionValuation::calc_price_par(double spot, int num_scenarios, unsigne
 		discounted_payoffs.reserve(num_scenarios);
 		const double disc_factor = std::exp(-int_rate_ * opt_.time_to_expiration());
 
-		vector<std::future<double>> ftrs;
+		vector<std::future<vector<double>>> ftrs;
 		ftrs.reserve(num_scenarios);
 
 		if (barrier_hit != true)
@@ -158,7 +159,7 @@ double MCOptionValuation::calc_price_par(double spot, int num_scenarios, unsigne
 			for (int i = 0; i < num_scenarios; i++)
 			{
 				EquityPriceGenerator epg{ spot,time_steps_,opt_.time_to_expiration(),vol_,
-				int_rate_,div_rate };
+				int_rate_,div_rate_};
 
 				ftrs.push_back(std::async(epg, unif_int_dist(mt_unif)));
 

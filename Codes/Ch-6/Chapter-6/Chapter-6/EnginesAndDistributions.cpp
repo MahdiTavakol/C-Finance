@@ -140,7 +140,7 @@ void shuffle_algo_example()
 
 void max_drawdown_sim()
 {
-	using std::vector, std::format, std::cout;
+	using std::vector, std::format, std::cout, std::array;
 	cout << "\n*** max_drawdown_sim() ***\n";
 
 	vector<double> pnl
@@ -197,7 +197,7 @@ void max_drawdown_sim()
 	cout << std::fixed << std::setprecision(2) << "Max DD from backtest = $" << max_dd <<
 		", Net P/L = $" << cum_pnl.back() << ", Net Profit/MaxDD = " << net_pl_over_max_dd << "\n\n";
 
-	auto max_dd_lam = [](const vector<double < &v)
+	auto max_dd_lam = [](const vector<double> &v)
 		{
 			std::vector<double> cum_pnl;
 			cum_pnl.reserve(v.size());
@@ -245,8 +245,6 @@ void max_drawdown_sim()
 
 	cout << "\n\nSmallest max dd = " << *(std::ranges::min_element(max_drawdowns)) 
 		<< " Largest max dd = " << *(std::ranges::max_element(max_drawdowns)) << "\n\n";
-
-	using std::array;
 
 	auto norm_params = [](const vector<double>& v) -> array<double,2>
 		{

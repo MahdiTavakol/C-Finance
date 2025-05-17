@@ -6,6 +6,7 @@
 
 class EquityPriceGenerator
 {
+public:
 	EquityPriceGenerator(double spot, int num_time_steps,
 		double time_to_expiration, double volatility, double rf_rate, double div_rate);
 

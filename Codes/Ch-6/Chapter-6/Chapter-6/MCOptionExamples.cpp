@@ -31,6 +31,7 @@ void euro_no_barrier_examples()
 	unsigned seed = 42;
 
 	cout << format("ITM call option with time to exp = {}, dividend rate = {}\n", time_to_exp, div);
+	// std::make_unique itself creates a rhs so there is no need for std::move here!
 	OptionInfo opt_call_itm{ std::move(std::make_unique<CallPayoff>(strike)),time_to_exp };
 	MCOptionValuation val_call_itm{ std::move(opt_call_itm),num_time_steps,vol,rate,div };
 

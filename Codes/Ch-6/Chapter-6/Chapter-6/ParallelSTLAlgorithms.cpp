@@ -67,10 +67,6 @@ void parallel_dot_product()
 
 	cout << format("dot_prod = {}\n", dot_prod);
 
-	dot_prod = std::transform_reduce(v.begin(), v.end(), w.begin(), 0);
-
-	cout << format("dot_prod = {}\n", dot_prod);
-
 	dot_prod = std::transform_reduce(v.begin(), v.end(), w.begin(), 0, std::plus<int>(), std::multiplies<int>());
 
 	int sum_diff = std::transform_reduce(v.begin(), v.end(), w.begin(), 0, std::plus<int>(), std::multiplies<int>());

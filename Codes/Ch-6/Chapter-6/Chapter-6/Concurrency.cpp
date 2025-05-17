@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <format>
 
-void concurrency_example()
+void concurrency_examples()
 {
 	squares();
 }
