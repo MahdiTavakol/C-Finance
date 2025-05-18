@@ -39,7 +39,7 @@ void ctor_ymd()
 		<< ", days since 1970.01.01 = " << d2.serial_date()
 		<< endl;
 	cout << "20th century date before UNIX epoch = " << d3
-		<< ", days before 1970.01.01 = " << -d3.serial_date()
+		<< ", days before 1970.01.01 = " << d3.serial_date()
 		<< endl;
 
 	cout << endl << endl;

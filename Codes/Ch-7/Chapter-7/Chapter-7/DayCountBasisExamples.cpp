@@ -27,7 +27,7 @@ void book_examples()
 	ChronoDate ed_02{ 2023,4,10 };
 
 	double yf_act_365_01 = act_365.year_fraction( sd_01,ed_01 );
-	double yf_act_365_01 = act_365.year_fraction( sd_02,ed_02 );
+	double yf_act_365_02 = act_365.year_fraction( sd_02,ed_02 );
 
 	double yf_act_360_01 = act_360.year_fraction( sd_01,ed_01 );
 	double yf_act_360_02 = act_360.year_fraction( sd_02, ed_02);

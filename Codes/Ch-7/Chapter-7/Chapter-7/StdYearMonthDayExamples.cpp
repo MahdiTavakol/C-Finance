@@ -170,7 +170,7 @@ void leap_years_and_last_day_of_month()
 	using namespace std::chrono;
 
 	year_month_day ymd_leap{ year{2024},month{10},day{26} };
-	bool torf = ymd_leap.year.is_leap();
+	bool torf = ymd_leap.year().is_leap();
 	cout << std::boolalpha << ymd_leap << ": " << torf << "\n";
 
 	year_month_day_last eom_apr{ year{2009} / April / last };
