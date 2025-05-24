@@ -15,7 +15,7 @@ Bond::Bond(const std::string& bond_id, const ChronoDate& dated_date,
 	amend_initial_irregular_dates_and_pmts_(dated_date, first_coupon_date,
 		months_in_regular_coupon_period, regular_coupon_payment);
 	amend_final_irregular_dates_and_pmts_(penultimate_coupon_date, maturity_date,
-		months_in_regular_coupon_period, regular_coupon_payment);
+		months_in_regular_coupon_period, regular_coupon_payment,face_value);
 
 	due_dates_.push_back(maturity_date);
 	payment_dates_.push_back(maturity_date);
@@ -78,7 +78,7 @@ void Bond::amend_final_irregular_dates_and_pmts_(const ChronoDate& penultimate_c
 		{
 			double coupon_fraction =
 				static_cast<double>(maturity_date - penultimate_coupon_date) /
-				static_cast<doublE>(maturity_regular_date - penultimate_coupon_date);
+				static_cast<double>(maturity_regular_date - penultimate_coupon_date);
 			final_coupon *= coupon_fraction;
 		}
 		else
@@ -97,7 +97,7 @@ void Bond::amend_final_irregular_dates_and_pmts_(const ChronoDate& penultimate_c
 double Bond::discounted_value(const ChronoDate& bond_settle_date, const YieldCurve& yield_curve)
 {
 	double pv = 0.0;
-	for (size_t i = 0; i < due_dates.size(); i++)
+	for (size_t i = 0; i < due_dates_.size(); i++)
 	{
 		if (bond_settle_date < due_dates_[i])
 		{

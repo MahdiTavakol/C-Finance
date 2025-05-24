@@ -143,3 +143,91 @@ void test_add_fcns()
 	cout << "result = " << d2 << endl;
 	cout << "New serial date = " << d2.serial_date() << endl << endl;
 }
+
+void test_date_diff()
+{
+	cout << endl << "*** test_date_diff() ***" << endl;
+	ChronoDate d1{ 1973,10,26 };
+	ChronoDate d2{ 2016,02,22 };
+	ChronoDate d3{ 2016,02,29 };
+	ChronoDate d4{ 2016,05,31 };
+
+	auto diff1 = d2 - d1;
+	auto diff2 = d3 - d2;
+	auto eom_diff = d4 - d3;
+
+	cout << d2 << " - " << d1 << " = " << diff1 << " days" << endl;
+	cout << d3 << " - " << d2 << " = " << diff2 << " days" << endl;
+	cout << d4 << " - " << d3 << " = " << eom_diff << " days" << endl;
+	cout << ChronoDate{ 2023,5,14 } << " - " << ChronoDate{ 2022,11,14 } << " = "
+		<< ChronoDate{ 2023,5,14 } - ChronoDate{ 2022,11,14 } << " days" << endl;
+
+	cout << endl << endl;
+}
+
+void test_spaceship()
+{
+	cout << endl << "*** test_spaceship() ***" << endl;
+
+	ChronoDate d1{ 1973,10,26 };
+	ChronoDate d2{ 2016,02,22 };
+	ChronoDate d3{ 2016,02,29 };
+	ChronoDate d4{ 2016,04,30 };
+	ChronoDate d5{ 2016,04,30 };
+
+	cout << std::boolalpha;
+	cout << d1 << " < " << d2 << "? " << (d1 < d2) << endl;
+	cout << d1 << " > " << d2 << "? " << (d1 > d2) << endl;
+	cout << d1 << " <= " << d2 << "? " << (d1 <= d2) << endl;
+	cout << d1 << " >= " << d2 << "? " << (d1 >= d2) << endl;
+	cout << d1 << " == " << d2 << "? " << (d1 == d2) << endl;
+	cout << d1 << " != " << d2 << "? " << (d1 != d2) << endl << endl;
+
+	cout << d2 << " < " << d3 << "? " << (d2 < d3) << endl;
+	cout << d2 << " > " << d3 << "? " << (d2 > d3) << endl;
+	cout << d2 << " <= " << d3 << "? " << (d2 <= d3) << endl;
+	cout << d2 << " >= " << d3 << "? " << (d2 >= d3) << endl;
+	cout << d2 << " == " << d3 << "? " << (d2 == d3) << endl;
+	cout << d2 << " != " << d3 << "? " << (d2 != d3) << endl << endl;
+
+	cout << d3 << " < " << d4 << "? " << (d3 < d4) << endl;
+	cout << d3 << " > " << d4 << "? " << (d3 > d4) << endl;
+	cout << d3 << " <= " << d4 << "? " << (d3 <= d4) << endl;
+	cout << d3 << " >= " << d4 << "? " << (d3 >= d4) << endl;
+	cout << d3 << " == " << d4 << "? " << (d3 == d4) << endl;
+	cout << d3 << " != " << d4 << "? " << (d3 != d4) << endl << endl;
+
+	cout << d4 << " < " << d5 << "? " << (d4 < d5) << endl;
+	cout << d4 << " > " << d5 << "? " << (d4 > d5) << endl;
+	cout << d4 << " <= " << d5 << "? " << (d4 <= d5) << endl;
+	cout << d4 << " >= " << d5 << "? " << (d4 >= d5) << endl;
+	cout << d4 << " == " << d5 << "? " << (d4 == d5) << endl;
+	cout << d4 << " != " << d5 << "? " << (d4 != d5) << endl << endl;
+
+}
+
+void test_days_in_month()
+{
+	cout << endl << "*** test_days_in_month() ***" << endl;
+	ChronoDate d1{};
+	ChronoDate d2{ 1973,10,26 };
+	ChronoDate d3{ 2016,2,22 };
+	ChronoDate d4{ 2000,4,30 };
+
+	cout << "Days in 1970.01:" << d1.days_in_month() << endl;
+	cout << "Days in 1973.10:" << d2.days_in_month() << endl;
+	cout << "Days in 2016.02:" << d3.days_in_month() << endl;
+	cout << "Days in 2000.04:" << d4.days_in_month() << endl;
+	cout << endl << endl;
+}
+
+void test_vector_of_dates()
+{
+	cout << "\nVector of Dates:\n";
+	std::vector<ChronoDate> v{ {1973,10,26},{1993,7,16},{1997,2,21},{1998,5,30},{2023,5,30} };
+
+	for (const ChronoDate& d : v)
+	{
+		cout << d << " ";
+	}
+}

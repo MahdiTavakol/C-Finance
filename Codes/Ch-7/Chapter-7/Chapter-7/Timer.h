@@ -30,4 +30,4 @@ public:
 private:
 	std::chrono::time_point<clock> start_, stop_;
 
-}; #pragma once
+};

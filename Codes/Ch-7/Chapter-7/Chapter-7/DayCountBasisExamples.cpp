@@ -53,9 +53,9 @@ double treasury_bill(const ChronoDate& sett_date,
 	return face_value / (1.0 * mkt_yield * dc.year_fraction(sett_date, maturity_date));
 }
 
-void treasury_bill_example()
+void treasury_bill_examples()
 {
-	cout << "\n" << "*** treasury_bill_example() (DayCountBasisTest.cpp) ***\n";
+	cout << "\n" << "*** treasury_bill_examples() (DayCountBasisTest.cpp) ***\n";
 	double us_face = 20000;
 	double uk_face = 15000;
 	double us_yield = 0.045;
