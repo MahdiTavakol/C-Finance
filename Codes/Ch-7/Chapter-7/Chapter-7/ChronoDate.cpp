@@ -119,6 +119,8 @@ ChronoDate& ChronoDate::add_days(int rhs_days)
 	using namespace std::chrono;
 
 	date_ = sys_days(date_) + days{ rhs_days };
+
+	return *this;
 }
 
 ChronoDate& ChronoDate::weekend_roll()
