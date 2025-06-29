@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\6-Courses\C++ Programming\C++Finance\Codes\eigen-master</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EigenDecompositionExamples.cpp" />
+    <ClCompile Include="EigenStlExamples.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleDeclarations.h" />

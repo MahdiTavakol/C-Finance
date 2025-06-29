@@ -18,6 +18,9 @@
     <ClCompile Include="EigenDecompositionExamples.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EigenStlExamples.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleDeclarations.h">
