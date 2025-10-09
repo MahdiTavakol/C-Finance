@@ -130,10 +130,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EigenDecompositionExamples.cpp" />
+    <ClCompile Include="EigenIntroExamles.cpp" />
     <ClCompile Include="EigenStlExamples.cpp" />
+    <ClCompile Include="ExpressionTemplateExamples.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleDeclarations.h" />
+    <ClInclude Include="ExpressionTemplates.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

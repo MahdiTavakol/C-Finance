@@ -21,9 +21,18 @@
     <ClCompile Include="EigenStlExamples.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EigenIntroExamles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpressionTemplateExamples.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleDeclarations.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionTemplates.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
