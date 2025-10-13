@@ -30,6 +30,9 @@
     <ClCompile Include="LazyEvaluationDemonstrations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MdSpanStdBlasExamples.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleDeclarations.h">
