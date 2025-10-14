@@ -123,6 +123,73 @@ void submdspan_exmaples()
 			cout << mds1(i, j) << "\t";
 		cout << endl;
 	}
+
+	auto row_1 = stdex::submdspan(mds1, 0, stdex::full_extent);
+	auto col_2 = stdex::submdspan(mds1, stdex::full_extent, mds.extent(1) - 1);
+
+	cout << endl << typeid(row_1).name() << endl;
+	cout << row_1[0] << endl << endl;
+
+	cout << "1st row (index = 0):" << endl;
+	for (size_t k = 0; k < row_1.extent(0); ++k)
+		cout << format("row_1[{}] = {}", k, row_1[k]) << "\t";
+
+	cout << endl << endl;
+
+	cout << "2nd column (index = 1): " << endl;
+	for (size_t k = 0; k < col_2.extent(0), ++k)
+		cout << format("col_2[{}] = {}", k, col_2[k]) << "\t";
+
+	cout << "Modify last element of 2nd column submdspan; what happens to original mdspan?:" << endl;
+	col_2[2] = 3333;
+
+	for (size_t i = 0; i < n_rows; ++i)
+	{
+		for (size_t j = 0; j < n_cols; j++)
+			cout << mds1(i, j) << "\t";
+		cout << endl;
+	}
+
+	cout << endl << endl;
+
+	cout << "The original std::vector v is also modified:" << endl;
+	for (int x : v)
+		cout << x << " ";
+
+	cout << endl << endl;
 	
 
+}
+
+void std_blas_mtx_vector_prod()
+{
+	cout << endl << "*** std_blas_mtx_vector_prod() ***" << endl;
+
+	using std::vector, std::size_t;
+	namespace stdex = std::experimental;
+
+	constexpr size_t m = 2;
+	constexpr size_t n = 3;
+
+	std::vector<double> A_vec(m * n);
+	std::vector<double> x_vec(n);
+
+	A_vec = { 1.0, 2.0,3.0,4.0,5.0,6.0 };
+	x_vec = { 1.0,2.0,3.0 };
+
+	print_dynamic_mdspan(m, n, A_vec);
+
+	std::vector<double> y_vec(n);
+
+	mdspan A{ A_vec.data(),m,n };
+	mdspan x{ x_vec.data(),n };
+	mdspan y{ y_vec.data(),m };
+
+	stdex::linalg::matrix_vector_product(A, x, y);
+
+	cout << "Mtx-vector prod Ax = \n";
+	for (size_t j = 0; j < m; j++)
+		cout << y(j) << " ";
+
+	cout << endl << endl;
 }

@@ -134,6 +134,7 @@
     <ClCompile Include="EigenStlExamples.cpp" />
     <ClCompile Include="ExpressionTemplateExamples.cpp" />
     <ClCompile Include="LazyEvaluationDemonstrations.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MdSpanStdBlasExamples.cpp" />
   </ItemGroup>
   <ItemGroup>
