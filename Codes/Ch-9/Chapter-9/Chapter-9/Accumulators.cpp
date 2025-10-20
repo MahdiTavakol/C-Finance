@@ -9,8 +9,7 @@
 #include <boost/accumulators/statistics/rolling_mean.hpp>
 #include <boost/accumulators/statistics/rolling_variance.hpp>
 
-
-#include <Eigen/Dense>
+#include "../../../eigen-master/Eigen/Dense"
 
 #include <vector>
 #include <cmath>
@@ -149,6 +148,56 @@ void bollinger_bands(double n, unsigned obs, unsigned win_size)
 
 	cout << "Indictor Info (Bollinger Bands): " << endl;
 	cout << std::fixed << std::setprecision(2) << indicators << endl << endl;
+}
+
+void ma_cross(unsigned fast_ma_win, unsigned slow_ma_win, unsigned obs)
+{
+	cout << "*** ma_cross(.) ***" << endl;
+
+	using std::vector, Eigen::MatrixXd;
+
+	vector<double> prices
+	{
+		100.00, 103.49, 102.82, 106.86, 104.91,
+		107.38, 107.46, 111.01, 112.01, 114.11,
+		116.91, 121.74, 120.04, 120.24, 120.12,
+		120.61, 121.31, 119.25, 118.11, 120.36,
+		117.36, 119.12, 119.36, 123.54, 123.42
+	};
+
+	bacc::accumulator_set<double, bacc::stats<bacc::tag::rolling_mean>>
+		fast_ma_acc(bacc::tag::rolling_window::window_size = fast_ma_win);
+
+	bacc::accumulator_set<double, bacc::stats<bacc::tag::rolling_mean>>
+		slow_ma_acc(bacc::tag::rolling_window::window_size = slow_ma_win);
+
+	MatrixXd indicators{ prices.size(),3 };
+
+	for (size_t rec = 0; rec < prices.size(); rec++)
+	{
+		indicators(rec, 0) = prices[rec];
+		fast_ma_acc(prices[rec]);
+		slow_ma_acc(prices[rec]);
+
+		if (rec >= fast_ma_win - 1 && rec >= slow_ma_win - 1) {
+			indicators(rec, 1) = bacc::extract::rolling_mean(fast_ma_acc);
+			indicators(rec, 2) = bacc::extract::rolling_mean(slow_ma_acc);
+		}
+		else if (rec >= fast_ma_win && rec < slow_ma_win)
+		{
+			indicators(rec, 1) = bacc::extract::rolling_mean(fast_ma_acc);
+			indicators(rec, 2) = 0.0;
+		}
+		else
+		{
+			indicators(rec, 1) = 0.0;
+			indicators(rec, 2) = 0.0;
+		}
+	}
+
+	cout << "Indicator Info (MA Cross):" << endl;
+	cout << indicators << endl << endl;
+
 }
 
 
