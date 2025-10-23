@@ -124,10 +124,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinomialLatticePricer.h" />
     <ClInclude Include="ExampleDeclarations.h" />
+    <ClInclude Include="OptionInfo.h" />
+    <ClInclude Include="Payoffs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Accumulators.cpp" />
+    <ClCompile Include="BinomialLatticePricer.cpp" />
+    <ClCompile Include="BoostMathConstExamples.cpp" />
+    <ClCompile Include="BoostMultiArray.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="OptionInfo.cpp" />
+    <ClCompile Include="Payoffs.cpp" />
+    <ClCompile Include="StatisticalDistributions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
